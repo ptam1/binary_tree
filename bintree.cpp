@@ -3,52 +3,43 @@
 
 using namespace std;
 
-template <class T>
-int depth(binary_tree_node<T> *root)
-{
-	int depth_num_left = 0;
-	int depth_num_left = 0;
-	if(root == NULL)
-	{
-		return -1;
-	}
-	else
-	{
-		depth_num_left = depth(root->left);
-		depth_num_right = depth(root->right);
-	}
-	
-	if(depth_num_left > depth_num_right)
-	{
-		return depth_num_left+1;
-	}
-	else
-	{
-		return depth_num_right+1;
-	}
-}
 
-template <class T>
-T max(binary_tree_node<T> *root)
-{
-	
-}
 
 double tree_sum(binary_tree_node<double> *root)
 {
+	double count = 0;
+	double right = 0;
+	double left = 0;
 	
+	if(root == NULL)
+	{
+		return 0;
+	}
+		right = tree_sum(root->right());
+		left = tree_sum(root->left());
+	    count = right+left+root->data();
+	    return count;
 }
 
 double tree_average(binary_tree_node<double> *root)
 {
+	double sum = 0;
+	double right = 0;
+	double left = 0;
+	double average = 0;
+	double treeSize =0;
 	
+	if(root == NULL)
+	{
+		return 0;
+	}
+		sum = tree_sum(root);
+		treeSize = tree_size(root);
+		average = (sum/treeSize);
+	    return average;
 }
 
-template <class T>
-bool tree_is_balanced(binary_tree_node<T> *root)
-{
-	
-}
+
 
 
 
@@ -60,3 +51,4 @@ bool bears(int n)
 {
 	
 }
+
