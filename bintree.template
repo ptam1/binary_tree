@@ -4,6 +4,7 @@
 #include <cstdlib>   // Provides NULL, std::size_t
 #include <iomanip>    // Provides std::setw
 #include <iostream>   // Provides std::cout
+#include <cmath>      //Provides absolute function
 using namespace std;
 
     template <class Process, class BTNode>
@@ -133,41 +134,56 @@ int depth(binary_tree_node<T> *root)
 template <class T>
 T max(binary_tree_node<T> *root)
 {
-	T max_left;
-	T max_right;
-	T root_data;
-
-       assert(root != NULL);
-       if(root->left() == NULL || root->right() == NULL)
+	assert(root != NULL);
+	T max_right = NULL;
+	T max_left = NULL;
+	T root_data = root->data(); 
+	
+		if((root->left() == NULL) || (root->right() == NULL))
 	   {
-		   
+		   //Ignore empty subtree
 	   }
-	   else
+	   else 
 	   {
-		max_left = max(root->left());
-		max_right = max(root->right());
-		root_data = root->data();
+		 max_left = max(root->left());
+		 max_right = max(root->right());	
 	   }
 	
-	if((max_left < max_right) || (root_data < max_right))
+
+	 	
+	if((max_right < max_left) && (root_data < max_left))                  
+	{
+		return max_left;	
+	}
+	else if((max_left < max_right) && (root_data < max_right))
 	{
 		return max_right;
 	}
-	else if((max_right < max_left) || (root_data < max_left))
-	{
-		return max_left;
-	}
-	else 
+	else  
 	{
 		return root_data;
-	}
-
+	}    
 }
 
 template <class T>
 bool tree_is_balanced(binary_tree_node<T> *root)
 {
+	int depth_left = depth(root->left());
+	int depth_right = depth(root->right());
+	int depth_diff = abs(depth_left-depth_right);
 	
+	if(root == NULL)
+	{
+		return true;
+	}
+	else if(depth_diff > 1)
+	{
+		return false;
+	}
+	else
+	{
+		return true;
+	}
 }
       
       
