@@ -41,14 +41,30 @@ double tree_average(binary_tree_node<double> *root)
 
 
 
-
-
 /* Postcondition: A true return value means that it is 
     possible to win the bear game by starting
    with n bears. A false return value means that it is not possible to win the bear game by starting
    with n bears. */
 bool bears(int n)
 {
+	int last_digit = (n%10);
+	int next_to_last_digit = ((n%100)/100);
 	
+	if((n%2 == 0) && bears(n/2))
+	{
+		return true;
+	}
+	else if((n%3 == 0) || (n%4 == 0) && bears(last_digit*next_to_last_digit))
+	{
+		return true;
+	}
+	else if(n%5 == 0 && bears(42))
+	{
+		return true;
+	}
+	else
+	{	
+	return false;
+	}
 }
 
